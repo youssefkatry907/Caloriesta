@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const app_1 = __importDefault(require("./app"));
+const admin_1 = __importDefault(require("./admin"));
+const customer_1 = __importDefault(require("./customer"));
+const resturant_1 = __importDefault(require("./resturant"));
+const website_1 = __importDefault(require("./website"));
+const cart_1 = __importDefault(require("./cart"));
+const handleReq_1 = __importDefault(require("../middlewares/handleReq"));
+const app = (0, express_1.default)();
+app.use("/api/v1/app", app_1.default);
+app.use("/api/v1/admin", admin_1.default);
+app.use("/api/v1/customer", handleReq_1.default, customer_1.default);
+app.use("/api/v1/resturant", handleReq_1.default, resturant_1.default);
+app.use("/api/v1/cart", handleReq_1.default, cart_1.default);
+app.use("/", website_1.default);
+exports.default = app;
